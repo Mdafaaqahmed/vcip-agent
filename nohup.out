@@ -1,0 +1,5 @@
+
+> video@0.1.0 start /home/syntizen/Desktop/odisha_new_project/UI.Agent
+> PORT=5008 react-scripts start
+
+Something is already running on port 5008.
