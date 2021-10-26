@@ -3,7 +3,6 @@ import Aux from '../../../hoc';
 
 const Attachment = (props) => {
     // console.log(props.panPhoto.info.pandetails[0][aipht]);
-
     // const photo = () => {
     //     props.panPhoto.info.pandetails?.map((data) => {
     //         const path = "data:image/png;base64,"+data.aipht;
