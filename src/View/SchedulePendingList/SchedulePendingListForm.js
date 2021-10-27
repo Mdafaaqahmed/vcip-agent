@@ -55,7 +55,7 @@ export class SchedulePendingListForm extends Component {
         if (sdate && startTime && endTime && !error.isSTError && !error.isETError) {
             const model = {
                 stime: startTime + '-' + endTime,
-                sdate: sdate,
+                sdate: sdate
             }
             this.props.rescheduleSubmit(model);
         } else if (!sdate) {
