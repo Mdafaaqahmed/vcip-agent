@@ -1971,6 +1971,25 @@ input[type="checkbox"] {
             transform: scale(1.02);
         }      
     }
+    .vpl-tbl-btn-cancel{
+        position: relative;
+        background-color: #ff0055 !important;
+        &:hover{
+            span{
+                opacity: 1;
+            }
+        }
+        span{            
+            position: absolute;
+            right: -49px;
+            background: #ff0055;
+            border-radius: 6px;
+            width: 50px;
+            height: 20px;
+            font-size: 13px;
+            opacity: 0;
+        }
+    }
 }
 
 .modal-form{

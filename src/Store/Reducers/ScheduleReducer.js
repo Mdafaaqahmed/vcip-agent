@@ -2,6 +2,7 @@ import * as actionTypes from '../Actions/types';
 
 const INITIAL = {
     pendingList: [],
+    scheduleList: [],
     languagesList: [],
     calenderDetails: {},
 }
@@ -18,6 +19,9 @@ const ScheduleReducer = (state = INITIAL, action) => {
 
         case actionTypes.PENDINGLIST:
             return { ...state, pendingList: action.payload }
+
+        case actionTypes.SCHEDULELIST:
+            return { ...state, scheduleList: action.payload }
 
         case actionTypes.LANGAUGESLIST:
             return { ...state, languagesList: action.payload }

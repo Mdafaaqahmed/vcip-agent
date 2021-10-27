@@ -13,13 +13,13 @@ const PendingListTable = (props) => {
                     <th scope="col">Mobile</th>
                     <th scope="col">Created Date</th>
                     {/* <th scope="col">Location</th> */}
-                    <th scope="col">Schedule</th>
+                    <th scope="col">{props.isScheduled ? 'Reschedule' : 'Schedule'}</th>
                 </tr>
             </thead>
             <tbody>
                 {props.pendingList && props.pendingList.length > 0
                     ? props.pendingList.map((item, i) => (<tr key={i}>
-                        <th scope="row">{i+1}</th>
+                        <th scope="row">{i + 1}</th>
                         <td>{item.vcipid}</td>
                         <td>{item.ppoid}</td>
                         <td>{item.name}</td>
@@ -28,7 +28,13 @@ const PendingListTable = (props) => {
                         <td>{item.createdon}</td>
                         {/* <td>{item.customerloc}</td> */}
                         <td>
-                            <button className="vpl-tbl-btn" title="Schedule" onClick={() => props.showScheduleModal(item)}><i className="far fa-calendar-alt"></i></button>
+                            {props.isScheduled 
+                            ? <button className="vpl-tbl-btn vpl-tbl-btn-cancel" title="Schedule" onClick={() => props.showScheduleModal(item)}>
+                                <i className="fas fa-times-circle"></i>
+                                <span>Cancel</span>
+                                </button> 
+                            : <button className="vpl-tbl-btn" title="Schedule" onClick={() => props.showScheduleModal(item)}><i className="far fa-calendar-alt"></i></button>}
+                            
                         </td>
                     </tr>))
                     : <tr>
