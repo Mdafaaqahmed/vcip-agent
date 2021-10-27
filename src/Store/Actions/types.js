@@ -26,4 +26,5 @@ export const LOCATION = "LOCATION";
 export const WIDTHHEIGHT = "WIDTHHEIGHT";
 export const CALENDER = "CALENDER";
 export const LANGAUGESLIST = "LANGAUGESLIST";
+export const SCHEDULELIST = "SCHEDULELIST";
 

@@ -54,6 +54,70 @@ export const GetVCIPSchedulePendingList = ($this) => {
     }
 }
 
+// GET SCHEDULE LIST
+export const GetVCIPScheduleList = ($this) => {
+    return (dispatch) => {
+        const URL = "GetVCIPIDList";
+        const body = {
+            slk: process.env.REACT_APP_SLK_KEY,
+            userid: sessionStorage.getItem("userid")
+        }
+        Axios.post(URL, parsingData(body))
+            .then((res) => {
+                var resp = extractData(res.data);
+                console.log(resp);
+                $this.setState({
+                    loader: false,
+                });
+                dispatch({
+                    type: actionTypes.SCHEDULELIST,
+                    payload: resp?.vciplist
+                });
+            })
+            .catch((err) => {
+                $this.setState({
+                    loader: false,
+                });
+                toast.error("err");
+            })
+    }
+}
+
+// GET CANCEL SCHEDULE LIST
+export const CancelVCIPSchedule = (model, $this) => {
+    return (dispatch) => {
+        const URL = "cancelvideocallschedule";
+        const body = {
+            slk: process.env.REACT_APP_SLK_KEY,
+            userid: sessionStorage.getItem("userid"),
+            vcipid: model?.vcipid
+        }
+        console.log(body);
+        Axios.post(URL, parsingData(body))
+            .then((res) => {
+                var resp = extractData(res.data);
+                console.log(resp);
+                $this.setState({
+                    spinner: false,
+                });
+                if (resp.respcode === "200") {
+                    toast.success(resp.respdesc);
+                    $this.setState({
+                        isCancelModalOpened: false
+                    });
+                    dispatch(GetVCIPScheduleList($this));
+                } else {
+                    toast.warn(resp.respdesc);
+                }
+            })
+            .catch((err) => {
+                $this.setState({
+                    spinner: false,
+                });
+                toast.error("err");
+            })
+    }
+}
 
 // GET LANGUAGES
 export const GetLanguagesAction = () => {
@@ -82,7 +146,6 @@ export const GetLanguagesAction = () => {
             })
     }
 }
-
 
 // GetVideoCallScheduleCalender
 export const GetCalenderAction = (vcipId, langId) => {
@@ -117,9 +180,6 @@ export const GetCalenderAction = (vcipId, langId) => {
     }
 }
 
-
-
-
 // CreateVideoCallSchedule
 export const CreateScheduleByAgentAction = (model, $this) => {
     return (dispatch) => {
@@ -134,7 +194,7 @@ export const CreateScheduleByAgentAction = (model, $this) => {
         }
         Axios.post(URL, parsingData(body))
             .then((res) => {
-                var resp = extractData(res.data);   
+                var resp = extractData(res.data);
                 $this.setState({
                     spinner: false,
                 });

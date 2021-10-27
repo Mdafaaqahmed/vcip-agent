@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import PendingListModalCmp from '../../Component/SchedulePendingListCmp/PendingListModalCmp';
 import PendingListTable from '../../Component/SchedulePendingListCmp/PendingListTable';
 import Modal from '../../Portal/Modal';
-import { CreateScheduleByAgentAction, GetCalenderAction, GetLanguagesAction, GetVCIPSchedulePendingList } from '../../Store/Actions/ScheduleListAction';
+import { CancelVCIPSchedule, CreateScheduleByAgentAction, GetCalenderAction, GetLanguagesAction, GetVCIPScheduleList, GetVCIPSchedulePendingList } from '../../Store/Actions/ScheduleListAction';
+import CancelVCIPModal from './CancelVCIPModal';
 import SchedulePendingListForm from './SchedulePendingListForm';
 const $ = window.$;
 
@@ -13,7 +14,9 @@ export class SchedulePendingList extends Component {
         spinner: false,
         loader: false,
         isOpen: false,
+        isCancelModalOpened: false,
         vcipDetails: {},
+        cancelVcipDetails: {},
         currentDate: '',
         startDate: '',
         endDate: '',
@@ -28,7 +31,7 @@ export class SchedulePendingList extends Component {
             currentDate: currDate
         })
         this.props.GetVCIPSchedulePendingList(this);
-        // this.props.GetLanguagesAction();
+        this.props.GetVCIPScheduleList(this);
     }
 
     showScheduleModal = (vcipData) => {
@@ -38,9 +41,24 @@ export class SchedulePendingList extends Component {
         });
     }
 
+    showCancelModal = (vcipData) => {
+        this.setState({
+            isCancelModalOpened: true,
+            cancelVcipDetails: vcipData
+        });
+    }
+
     closeModal = () => {
         this.setState({
-            isOpen: false
+            isOpen: false,
+            vcipDetails: {}
+        })
+    }
+
+    closeCancelModal = () => {
+        this.setState({
+            isCancelModalOpened: false,
+            cancelVcipDetails: {}
         })
     }
 
@@ -53,6 +71,16 @@ export class SchedulePendingList extends Component {
             sdate: data?.sdate,
         };
         this.props.CreateScheduleByAgentAction(model, this);
+    }
+
+    cancelScheduleVCIPID = (event) => {
+        event.preventDefault();
+        this.setState({ spinner: true });
+        const { cancelVcipDetails } = this.state;
+        const model = {
+            vcipid: cancelVcipDetails?.vcipid,
+        };
+        this.props.CancelVCIPSchedule(model, this);
     }
 
     // formateDate = (val) => {
@@ -69,8 +97,8 @@ export class SchedulePendingList extends Component {
 
 
     render() {
-        const { pendingList, languagesList, calenderDetails } = this.props.ScheduleReducer;
-        const { isOpen, vcipDetails, currentDate } = this.state;
+        const { pendingList, scheduleList, languagesList, calenderDetails } = this.props.ScheduleReducer;
+        const { isOpen, vcipDetails, currentDate, isCancelModalOpened, cancelVcipDetails } = this.state;
         return (
             <>
                 {/* {this.state.loader ? (
@@ -106,10 +134,15 @@ export class SchedulePendingList extends Component {
                                             <PendingListTable
                                                 pendingList={pendingList}
                                                 showScheduleModal={this.showScheduleModal}
+                                                isScheduled={false}
                                             />
                                         </div>
                                         <div className="tab-pane fade" id="activeList" role="tabpanel" aria-labelledby="activeList-tab">
-                                            Coming soon...
+                                            <PendingListTable
+                                                pendingList={pendingList}
+                                                showScheduleModal={this.showCancelModal}
+                                                isScheduled={true}
+                                            />
                                         </div>
                                     </div>
                                 </div>
@@ -126,6 +159,13 @@ export class SchedulePendingList extends Component {
                         rescheduleSubmit={this.rescheduleSubmit}
                     />
                 </Modal>
+                <Modal isOpen={isCancelModalOpened}>
+                    <CancelVCIPModal
+                        vcipid={cancelVcipDetails?.vcipid}
+                        closeCancelModal={this.closeCancelModal}
+                        cancelScheduleVCIPID={this.cancelScheduleVCIPID}
+                    />
+                </Modal>
             </>
         )
     }
@@ -140,7 +180,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         GetVCIPSchedulePendingList: ($this) => dispatch(GetVCIPSchedulePendingList($this)),
         CreateScheduleByAgentAction: (model, $this) => dispatch(CreateScheduleByAgentAction(model, $this)),
-        // GetLanguagesAction: () => dispatch(GetLanguagesAction()),
+        GetVCIPScheduleList: ($this) => dispatch(GetVCIPScheduleList($this)),
+        CancelVCIPSchedule: (model, $this) => dispatch(CancelVCIPSchedule(model, $this)),
         // GetCalenderAction: (vcipId, langId) => dispatch(GetCalenderAction(vcipId, langId)),
         // GetCalenderAction: (vcipId, langId) => dispatch(GetCalenderAction(vcipId, langId)),
     }
