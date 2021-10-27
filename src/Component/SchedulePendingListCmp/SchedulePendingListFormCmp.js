@@ -3,7 +3,7 @@ import React from 'react';
 const SchedulePendingListFormCmp = (props) => {
     return (
         <form onSubmit={props.handleSubmit} id="form" autoComplete="off">
-                <h3 className="text-center mb-4">Reschedule</h3>
+                <h3 className="text-center mb-4">Schedule</h3>
             <div className="row">
                 <div className="col-md-6">
                     <div className="d-grp">
@@ -53,9 +53,8 @@ const SchedulePendingListFormCmp = (props) => {
                         <label className="d-label">Start Time</label>
                         <input type="time"
                             name="startTime"
-                            min={props.currentDate}
                             onChange={props.handleChange}
-                            className="d-inp"
+                            className={`d-inp ${props.error.isSTError ? 'error' : ''}`}
                             required />
                     </div>
                 </div>
@@ -64,9 +63,9 @@ const SchedulePendingListFormCmp = (props) => {
                         <label className="d-label">End Time</label>
                         <input type="time"
                             name="endTime"
-                            min={props.currentDate}
+                            // min={props.startTime}
                             onChange={props.handleChange}
-                            className="d-inp"
+                            className={`d-inp ${props.error.isETError ? 'error' : ''}`}
                             required />
                     </div>
                 </div>

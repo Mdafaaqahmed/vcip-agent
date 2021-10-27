@@ -13,7 +13,7 @@ const PendingListTable = (props) => {
                     <th scope="col">Mobile</th>
                     <th scope="col">Created Date</th>
                     {/* <th scope="col">Location</th> */}
-                    <th scope="col">Reschedule</th>
+                    <th scope="col">Schedule</th>
                 </tr>
             </thead>
             <tbody>
