@@ -394,8 +394,7 @@ export const JoinVideoAction = ($this, model) => {
         Axios.post(URL, parsingData(body))
             .then((res) => {
                 var resp = extractData(res.data);
-                // if (resp.respcode === "200") {
-                if ("200" === "200") {
+                if (resp.respcode === "200") {
                     toast.success(resp.respdesc);
                     sessionStorage.setItem("videoconfsessionid", model.videoconfsessionid)
                     $this.push("/customer/" + model.id);
