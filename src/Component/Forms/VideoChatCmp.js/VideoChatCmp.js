@@ -16,7 +16,6 @@ const VideoChatCmp = (props) => {
                 <div className="customer-video live-banker">
                     {/* <video src=""></video> */}
                     <img src="images/user.png" className="w-100 h-100" alt="no img" />
-                    {/* zlxkj */}
                 </div>
                 <div className="questions">
                     <ul className="nav qtn-nav">

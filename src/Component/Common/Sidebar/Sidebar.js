@@ -27,9 +27,6 @@ class Sidebar extends Component {
 
         return (
             <aside id="hideSidebar">
-                <h2 className="sidebar-title mb-4">
-                    OCAC
-                </h2>
                 <ul className="nav flex-column custom-sidebar">
                     <li className="nav-item custom-sidebar-item">
                         <NavLink to="/dashboard" exact activeClassName="active-tab" strict className="nav-link custom-sidebar-link">
@@ -82,17 +79,6 @@ class Sidebar extends Component {
                         </button>}
                     </li>
                 </ul>
-                <hr className="hr w-75 my-2 mx-auto" />
-                <p className="sidebar-subtitle mb-0 text-muted" style={{ fontSize: "10px" }}>Powered By</p>
-                <h2 className="sidebar-title mt-0 text-muted">
-                    Syntizen
-                </h2>
-                <div className="text-center mt-3">
-                    {/* <button className="logout mb-2" onClick={this.props.toggle}>
-                        {toggleIcon ? <i className="far fa-moon"></i> : <i class="fas fa-moon"></i>}
-                    </button> */}
-                    <button className="logout" onClick={this.logout}><i className="fas fa-power-off" /></button>
-                </div>
             </aside >
 
         )
