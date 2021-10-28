@@ -99,6 +99,7 @@ export class SchedulePendingList extends Component {
     render() {
         const { pendingList, scheduleList, languagesList, calenderDetails } = this.props.ScheduleReducer;
         const { isOpen, vcipDetails, currentDate, isCancelModalOpened, cancelVcipDetails } = this.state;
+        
         return (
             <>
                 {/* {this.state.loader ? (
@@ -139,7 +140,7 @@ export class SchedulePendingList extends Component {
                                         </div>
                                         <div className="tab-pane fade" id="activeList" role="tabpanel" aria-labelledby="activeList-tab">
                                             <PendingListTable
-                                                pendingList={pendingList}
+                                                pendingList={scheduleList}
                                                 showScheduleModal={this.showCancelModal}
                                                 isScheduled={true}
                                             />

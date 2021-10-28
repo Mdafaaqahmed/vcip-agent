@@ -27,6 +27,16 @@ class Sidebar extends Component {
 
         return (
             <aside id="hideSidebar">
+                <div className="sidebar-title mb-4">
+                    <div className="m-0 p-0">
+                        <img src="../images/Seal_of_Odisha.png" width="50" height="50" style={{ backgroundColor: "white" }} />
+                    </div>
+                    <div className="text-center mt-2">
+                        <h6>Government of Odisha</h6>
+                        <h6>Finance Department</h6>
+                    </div>
+                </div>
+
                 <ul className="nav flex-column custom-sidebar">
                     <li className="nav-item custom-sidebar-item">
                         <NavLink to="/dashboard" exact activeClassName="active-tab" strict className="nav-link custom-sidebar-link">
@@ -79,6 +89,17 @@ class Sidebar extends Component {
                         </button>}
                     </li>
                 </ul>
+                <div className="syntizen_watermark mb-3 mx-3">
+                    <hr className="hr w-75 my-2 mx-auto" />
+                    <p className="sidebar-subtitle mb-0 text-muted" style={{ fontSize: "10px" }}>Powered By</p>
+                    <h2 className="sidebar-title mt-0 text-muted">
+                        Syntizen
+                    </h2>
+                    <div className="text-center mt-3">
+                        <button className="logout" onClick={this.logout}><i className="fas fa-power-off" /></button>
+                    </div>
+                </div>
+
             </aside >
 
         )

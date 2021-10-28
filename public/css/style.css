@@ -696,7 +696,7 @@ main {
 }
 
 .dashboad .questions .qtn-nav .qtn-item .qtn-btn.active {
-  background-color: #ff0055;
+  background-color: #28a745 !important;
   color: #ffffff;
 }
 
@@ -1814,7 +1814,6 @@ input[type="checkbox"].switch:checked {
   padding: 15px;
   margin: 2% 0%;
   border-radius: 4px;
-  background-color: #bd486f !important;
   position: relative;
   z-index: 99;
   -webkit-transition: all 400ms cubic-bezier(0.95, 0.05, 0.795, 0.035);
@@ -1989,11 +1988,6 @@ table tbody tr td {
           box-shadow: 0px 4px 15px #ed77337a;
 }
 
-.d-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
 .d-grp {
   position: relative;
   margin-bottom: 18px;
@@ -2030,5 +2024,10 @@ table tbody tr td {
 
 .d-grp .d-inp:focus {
   border: 2px solid grey;
+}
+
+.syntizen_watermark {
+  bottom: 0;
+  position: absolute;
 }
 /*# sourceMappingURL=style.css.map */

@@ -111,7 +111,7 @@ body {
 }
 
 .user-steps .steps-nav .steps-item .steps-link .step-box.completed {
-  border: 2px solid #40CA79;
+  border: 2px solid #07bc0c;
 }
 
 .user-steps .steps-nav .steps-item .steps-link .step-box.completed .step-count {
@@ -120,7 +120,7 @@ body {
 }
 
 .user-steps .steps-nav .steps-item .steps-link .step-box.completed + .step-name {
-  color: #40CA79;
+  color: #07bc0c;
 }
 
 .user-steps .steps-nav .steps-item .steps-link .step-box::before {
@@ -181,7 +181,7 @@ body {
 .user-steps .step-line .step-progress {
   width: 0%;
   height: 100%;
-  background: #40CA79;
+  background: #07bc0c;
   -webkit-transition: all 400ms cubic-bezier(0.17, 0.67, 1, 1.23);
   transition: all 400ms cubic-bezier(0.17, 0.67, 1, 1.23);
 }
@@ -536,7 +536,7 @@ body {
 }
 
 .success {
-  color: #40CA79;
+  color: #07bc0c;
   padding-left: 4px;
 }
 
@@ -645,7 +645,7 @@ main {
 }
 
 .dashboad .questions .qtn-nav .qtn-item .qtn-btn.active {
-  background-color: #ff0055;
+  background-color: #07bc0c;
   color: #ffffff;
 }
 
