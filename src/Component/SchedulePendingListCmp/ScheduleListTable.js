@@ -1,7 +1,6 @@
 import React from 'react'
 
 const ScheduleListTable = (props) => {
-    console.log(props.pendingList)
     return (
         <div className="table-responsive">
             <table className="table">

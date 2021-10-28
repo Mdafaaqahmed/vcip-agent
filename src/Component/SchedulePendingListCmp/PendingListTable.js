@@ -1,7 +1,6 @@
 import React from 'react'
 
 const PendingListTable = (props) => {
-    console.log(props.pendingList)
     return (
         <div className="table-responsive"><table className="table">
             <thead className="thead-dark">
@@ -39,7 +38,7 @@ const PendingListTable = (props) => {
                         </td>
                     </tr>))
                     : <tr>
-                        <td colSpan={7} className="text-center">No list available</td>
+                        <td colSpan={8} className="text-center">No list available</td>
                     </tr>}
             </tbody>
         </table>
