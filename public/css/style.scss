@@ -2029,15 +2029,15 @@ table{
 }
 .d-btn{
     @extend .btn;
-    // &:disabled {
-    //     // background: #515270;
-    //     opacity: 0.5;
-    //     cursor: not-allowed;
-    //     // &:hover{
-    //     //     opacity: 0.1;
-    //     //     // background-color: transparent;
-    //     // }
-    // }
+    &:disabled {
+        // background: #515270;
+        opacity: 0.5;
+        cursor: not-allowed;
+        // &:hover{
+        //     opacity: 0.1;
+        //     // background-color: transparent;
+        // }
+    }
 }
 .d-grp{
     position: relative;
@@ -2076,5 +2076,12 @@ table{
     position: absolute;
 }
 
+table thead th{
+    white-space: nowrap;
+}
+
+.ws-nowrap{
+    white-space: nowrap !important;
+}
 // ==================================================
 // ==================================================

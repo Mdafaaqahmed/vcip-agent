@@ -57,7 +57,7 @@ export const GetVCIPSchedulePendingList = ($this) => {
 // GET SCHEDULE LIST
 export const GetVCIPScheduleList = ($this) => {
     return (dispatch) => {
-        const URL = "GetVCIPIDList";
+        const URL = "GetScheduledVCIPList";
         const body = {
             slk: process.env.REACT_APP_SLK_KEY,
             userid: sessionStorage.getItem("userid")
@@ -65,7 +65,6 @@ export const GetVCIPScheduleList = ($this) => {
         Axios.post(URL, parsingData(body))
             .then((res) => {
                 var resp = extractData(res.data);
-                console.log(resp);
                 $this.setState({
                     loader: false,
                 });
@@ -92,11 +91,9 @@ export const CancelVCIPSchedule = (model, $this) => {
             userid: sessionStorage.getItem("userid"),
             vcipid: model?.vcipid
         }
-        console.log(body);
         Axios.post(URL, parsingData(body))
             .then((res) => {
                 var resp = extractData(res.data);
-                console.log(resp);
                 $this.setState({
                     spinner: false,
                 });
