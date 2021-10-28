@@ -110,7 +110,7 @@ class UserList extends Component {
                                                         <span className="small pl-1 text-grey-dark">Scheduled Date : {res.sdate + ", " + res.stime}</span>
                                                     </strong>
 
-                                                            <button className="btn btn-sm btn-primary" onClick={() => this.joinCheck(res.vcipid, res.videoconfsessionid)}>Join</button>
+                                                            {/* <button className="btn btn-sm btn-primary" onClick={() => this.joinCheck(res.vcipid, res.videoconfsessionid)}>Join</button> */}
                                                     {res?.joinstatus === "1"
                                                         ? <button className="btn btn-sm btn-primary" onClick={() => this.joinCheck(res.vcipid, res.videoconfsessionid)}>Join</button>
                                                         : <strong className="text-gray-dark"><span className="small pl-1">Scheduled</span></strong>

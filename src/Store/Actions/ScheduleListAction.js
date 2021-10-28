@@ -68,10 +68,17 @@ export const GetVCIPScheduleList = ($this) => {
                 $this.setState({
                     loader: false,
                 });
-                dispatch({
-                    type: actionTypes.SCHEDULELIST,
-                    payload: resp?.vciplist
-                });
+                if (resp.respcode === "200") {
+                    dispatch({
+                        type: actionTypes.SCHEDULELIST,
+                        payload: resp?.vciplist
+                    });
+                } else {
+                    dispatch({
+                        type: actionTypes.SCHEDULELIST,
+                        payload: []
+                    });
+                }
             })
             .catch((err) => {
                 $this.setState({
