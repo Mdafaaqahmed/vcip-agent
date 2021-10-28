@@ -7,7 +7,7 @@ const UserFormCmp = (props) => {
             <div className="container">
                 <div className="row justify-content-center mt-5">
                     <div className="col-md-5">
-                        <h3 className="text-white mx-2">Treasury Officer/Branch Officer Panel</h3>
+                        <h5 className="text-white mx-2 text-center">Treasury Officer/Branch Officer Panel</h5>
                         <div className="contact-form">
                             <form className="my-4 bg-form" onSubmit={(event) => props.login(event, '0')}>
                                 {/* <div className="form-group position-relative">

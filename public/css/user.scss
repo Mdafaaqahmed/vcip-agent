@@ -158,7 +158,7 @@ body{
                     position: relative;
                     z-index: 9;
                     &.completed{
-                        border: 2px solid #40CA79;
+                        border: 2px solid #07bc0c;
                         // animation: none;
                         // &::before{
                         //     animation: glow 1s linear infinite alternate;
@@ -168,7 +168,7 @@ body{
                             color: #ffffff;
                         }
                         + .step-name{
-                            color: #40CA79;
+                            color: #07bc0c;
                         }
                     }
                     &::before{
@@ -179,8 +179,8 @@ body{
                         width: 108%;
                         height: 108%;
                         z-index: 0;
-                        // background-color: #40CA79;
-                        // border: 4px solid #40CA79;
+                        // background-color: #07bc0c;
+                        // border: 4px solid #07bc0c;
                         // box-shadow: 0px 0px 1px 4px #ff0055;
                         border-radius: 100%;
                     }
@@ -227,7 +227,7 @@ body{
         .step-progress{
             width: 0%;
             height: 100%;
-            background: #40CA79;
+            background: #07bc0c;
             transition: all 400ms cubic-bezier(.17,.67,1,1.23);            
         }
     }
@@ -446,7 +446,7 @@ body{
 }
 
 .success{
-    color: #40CA79;
+    color: #07bc0c;
     padding-left: 4px;
 }
 .danger{
@@ -538,7 +538,7 @@ main{
                     align-items: center;
                     justify-content: center;
                     &.active{
-                        background-color: #ff0055;
+                        background-color: #07bc0c;
                         color: #ffffff;
                     }
                     &.qtn-info{
@@ -568,7 +568,7 @@ main{
                 border-right: 10px solid transparent;
                 border-top: 15px solid #BEBDC2;
                 // border-radius: 100px;
-                // background-color: #40CA79;
+                // background-color: #07bc0c;
                 z-index: 99;
             }
             .qtn-title{

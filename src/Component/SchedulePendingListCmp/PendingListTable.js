@@ -1,6 +1,7 @@
 import React from 'react'
 
 const PendingListTable = (props) => {
+    console.log(props.pendingList)
     return (
         <><table className="table">
             <thead className="thead-dark">

@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import Aux from '../../hoc'
 import { connect } from 'react-redux';
-import { UserListAction, JoinStatusAction, JoinVideoAction } from '../../Store/Actions/DetailsAction'
+import { UserListAction, JoinStatusAction, JoinVideoAction, FinishAction } from '../../Store/Actions/DetailsAction'
 import { Link } from 'react-router-dom';
 const $ = window.$;
 
 class UserList extends Component {
     state = {
-        intervalId: undefined
+        intervalId: undefined,
+        hideBtn: null
     }
 
     componentDidMount() {
@@ -15,7 +16,7 @@ class UserList extends Component {
         const userid = sessionStorage.getItem("userid");
         sessionStorage.removeItem("vcipid");
         sessionStorage.removeItem("videoconfsessionid");
-        const $this =  this.props.history;        
+        const $this = this.props.history;
         if (userid) {
             this.props.UserListAction($this);
             let intervalId = setInterval(() => {
@@ -34,6 +35,7 @@ class UserList extends Component {
         // else {
         //     clearInterval(this.state.intervalId)
         // }
+
     }
 
     componentWillUnmount() {
@@ -54,17 +56,60 @@ class UserList extends Component {
 
     joinCheck = (vcipid, videoconfsessionid) => {
         const $this = this.props.history;
-        const model ={
+        const model = {
             id: vcipid,
             videoconfsessionid: videoconfsessionid
-        }       
+        }
         this.props.JoinVideoAction($this, model);
+    }
+
+    hideBtn = (res) => {
+        const first_half = res.stime.split("-")[0];
+        const sec_half = res.stime.split("-")[1];
+        const first = (parseInt(first_half.split(":")[0])) * 60 * 60 + (parseInt(first_half.split(":")[1]) * 60)
+        const sec = (parseInt(sec_half.split(":")[0])) * 60 * 60 + (parseInt(sec_half.split(":")[1]) * 60)
+
+        // var dateString = moment(now).format('YYYY-MM-DD');
+        var myDate = new Date().toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1");
+        const curr = myDate.split(":").slice(0, 2)
+        const curr_final = (parseInt(curr[0])) * 60 * 60 + (parseInt(curr[1]) * 60)
+        console.log(first)
+        console.log(sec)
+        console.log(curr_final)
+        if (first <= curr_final && sec >= curr_final) {
+            console.log("Disabled")
+            this.setState({
+                hideBtn: false
+            })
+        } else if (sec <= curr_final) {
+            this.setState({
+                hideBtn: true
+            })
+        }
+    }
+
+    secondsToTime = (secs) => {
+        var hours = Math.floor(secs / (60 * 60));
+
+        var divisor_for_minutes = secs % (60 * 60);
+        var minutes = Math.floor(divisor_for_minutes / 60);
+
+        var divisor_for_seconds = divisor_for_minutes % 60;
+        var seconds = Math.ceil(divisor_for_seconds);
+
+        var obj = {
+            "h": hours,
+            "m": minutes,
+            "s": seconds
+        };
+        return obj;
     }
 
     render() {
         // if (this.props.InfoRdr.joinStatus?.status === "1") {
         //     clearInterval(this.state.intervalId)
-        // }
+        // }    
+
         return (
             <Aux>
                 <div className="container">
@@ -74,11 +119,12 @@ class UserList extends Component {
                                 <div className="my-3 p-3 bg-white rounded shadow-sm">
                                     <h6 className="border-bottom border-gray pb-2 mb-0">
                                         VCIP LIST
-                                    <span className="float-right">
+                                        <span className="float-right">
                                             {this.props.InfoRdr.userList?.vciplistcount}
                                         </span>
                                     </h6>
                                     {this.props.InfoRdr.userList?.vciplist?.map((res, i) => (res?.isscheduled === "0"
+
                                         ? <div className="media text-muted pt-3" key={i}>
                                             <svg className="bd-placeholder-img mr-2 rounded" width={32} height={32} xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff" /><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
                                             <div className="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
@@ -87,8 +133,8 @@ class UserList extends Component {
                                                     {res?.joinstatus === "1" ? (
                                                         <button className="btn btn-sm btn-primary" onClick={() => this.joinCheck(res.vcipid, res.videoconfsessionid)}>Join</button>
                                                     ) : (
-                                                            "Completed"
-                                                        )}
+                                                        "Completed"
+                                                    )}
                                                 </div>
                                                 <span className="d-block">{res.lastsessionon}</span>
                                             </div>
@@ -109,7 +155,15 @@ class UserList extends Component {
                                                         {res.vcipid}
                                                         <span className="small pl-1 text-grey-dark">Scheduled Date : {res.sdate + ", " + res.stime}</span>
                                                     </strong>
-                                                    <button className="btn btn-sm btn-primary" onClick={() => this.joinCheck(res.vcipid, res.videoconfsessionid)}>Join</button>
+                                                    {
+                                                        // res.stime.split("-")[0] >= res.stime.split("-")[1] && res.stime.split("-")[1].split(":")[1] <= res.stime.split("-")[0].split(":")[1] ? console.log("Enabled") : console.log("Disabled"),
+                                                        this.state.hideBtn ? (
+                                                            <button className="btn btn-sm btn-primary" onClick={() => this.joinCheck(res.vcipid, res.videoconfsessionid)}>Join</button>
+                                                        ) : (null)
+                                                        // console.log(res.stime.split("-")[0], res.stime.split("-")[1])
+
+                                                    }
+
                                                     {/* {res?.joinstatus === "1"
                                                         ? <button className="btn btn-sm btn-primary" onClick={() => this.joinCheck(res.vcipid, res.videoconfsessionid)}>Join</button>
                                                         : <strong className="text-gray-dark"><span className="small pl-1">Scheduled</span></strong>
@@ -139,7 +193,7 @@ class UserList extends Component {
                                     {/* <img src="../images/success.svg" alt="no img" /> */}
                                     <h1 className="modal-data-title">
                                         Ready to take Video conferance with
-                                         {this.props.InfoRdr.joinStatus?.vcipid}
+                                        {this.props.InfoRdr.joinStatus?.vcipid}
                                     </h1>
 
                                     <div className="row justify-content-center">
