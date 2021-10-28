@@ -8,7 +8,6 @@ const $ = window.$;
 class UserList extends Component {
     state = {
         intervalId: undefined,
-        hideBtn: null
     }
 
     componentDidMount() {
@@ -63,52 +62,7 @@ class UserList extends Component {
         this.props.JoinVideoAction($this, model);
     }
 
-    hideBtn = (res) => {
-        const first_half = res.stime.split("-")[0];
-        const sec_half = res.stime.split("-")[1];
-        const first = (parseInt(first_half.split(":")[0])) * 60 * 60 + (parseInt(first_half.split(":")[1]) * 60)
-        const sec = (parseInt(sec_half.split(":")[0])) * 60 * 60 + (parseInt(sec_half.split(":")[1]) * 60)
-
-        // var dateString = moment(now).format('YYYY-MM-DD');
-        var myDate = new Date().toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1");
-        const curr = myDate.split(":").slice(0, 2)
-        const curr_final = (parseInt(curr[0])) * 60 * 60 + (parseInt(curr[1]) * 60)
-        console.log(first)
-        console.log(sec)
-        console.log(curr_final)
-        if (first <= curr_final && sec >= curr_final) {
-            console.log("Disabled")
-            this.setState({
-                hideBtn: false
-            })
-        } else if (sec <= curr_final) {
-            this.setState({
-                hideBtn: true
-            })
-        }
-    }
-
-    secondsToTime = (secs) => {
-        var hours = Math.floor(secs / (60 * 60));
-
-        var divisor_for_minutes = secs % (60 * 60);
-        var minutes = Math.floor(divisor_for_minutes / 60);
-
-        var divisor_for_seconds = divisor_for_minutes % 60;
-        var seconds = Math.ceil(divisor_for_seconds);
-
-        var obj = {
-            "h": hours,
-            "m": minutes,
-            "s": seconds
-        };
-        return obj;
-    }
-
     render() {
-        // if (this.props.InfoRdr.joinStatus?.status === "1") {
-        //     clearInterval(this.state.intervalId)
-        // }    
 
         return (
             <Aux>
@@ -155,19 +109,12 @@ class UserList extends Component {
                                                         {res.vcipid}
                                                         <span className="small pl-1 text-grey-dark">Scheduled Date : {res.sdate + ", " + res.stime}</span>
                                                     </strong>
-                                                    {
-                                                        // res.stime.split("-")[0] >= res.stime.split("-")[1] && res.stime.split("-")[1].split(":")[1] <= res.stime.split("-")[0].split(":")[1] ? console.log("Enabled") : console.log("Disabled"),
-                                                        this.state.hideBtn ? (
+
                                                             <button className="btn btn-sm btn-primary" onClick={() => this.joinCheck(res.vcipid, res.videoconfsessionid)}>Join</button>
-                                                        ) : (null)
-                                                        // console.log(res.stime.split("-")[0], res.stime.split("-")[1])
-
-                                                    }
-
-                                                    {/* {res?.joinstatus === "1"
+                                                    {res?.joinstatus === "1"
                                                         ? <button className="btn btn-sm btn-primary" onClick={() => this.joinCheck(res.vcipid, res.videoconfsessionid)}>Join</button>
                                                         : <strong className="text-gray-dark"><span className="small pl-1">Scheduled</span></strong>
-                                                    } */}
+                                                    }
                                                 </div>
                                                 <span className="d-block schedule-created">{res.lastsessionon}</span>
                                             </div>
