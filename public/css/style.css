@@ -1988,6 +1988,11 @@ table tbody tr td {
           box-shadow: 0px 4px 15px #ed77337a;
 }
 
+.d-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .d-grp {
   position: relative;
   margin-bottom: 18px;
@@ -2029,5 +2034,13 @@ table tbody tr td {
 .syntizen_watermark {
   bottom: 0;
   position: absolute;
+}
+
+table thead th {
+  white-space: nowrap;
+}
+
+.ws-nowrap {
+  white-space: nowrap !important;
 }
 /*# sourceMappingURL=style.css.map */

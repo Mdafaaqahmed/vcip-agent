@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import PendingListModalCmp from '../../Component/SchedulePendingListCmp/PendingListModalCmp';
 import PendingListTable from '../../Component/SchedulePendingListCmp/PendingListTable';
+import ScheduleListTable from '../../Component/SchedulePendingListCmp/ScheduleListTable';
 import Modal from '../../Portal/Modal';
 import { CancelVCIPSchedule, CreateScheduleByAgentAction, GetCalenderAction, GetLanguagesAction, GetVCIPScheduleList, GetVCIPSchedulePendingList } from '../../Store/Actions/ScheduleListAction';
 import CancelVCIPModal from './CancelVCIPModal';
@@ -20,6 +21,7 @@ export class SchedulePendingList extends Component {
         currentDate: '',
         startDate: '',
         endDate: '',
+        selectedTab: null
     }
 
     componentDidMount() {
@@ -31,7 +33,6 @@ export class SchedulePendingList extends Component {
             currentDate: currDate
         })
         this.props.GetVCIPSchedulePendingList(this);
-        this.props.GetVCIPScheduleList(this);
     }
 
     showScheduleModal = (vcipData) => {
@@ -83,6 +84,22 @@ export class SchedulePendingList extends Component {
         this.props.CancelVCIPSchedule(model, this);
     }
 
+    vcipListTab = (value) => {
+        const { selectedTab } = this.state;
+        if (selectedTab === value) {
+            return;
+        }
+        this.setState({
+            selectedTab: value
+        });
+        if (value === 1) {
+            this.props.GetVCIPSchedulePendingList(this);
+        } else if (value === 2) {
+            this.props.GetVCIPScheduleList(this);
+        }
+
+    }
+
     // formateDate = (val) => {
     //     const oldDate = val;
     //     let newDate = oldDate?.split("-").reverse().join("-");
@@ -99,7 +116,7 @@ export class SchedulePendingList extends Component {
     render() {
         const { pendingList, scheduleList, languagesList, calenderDetails } = this.props.ScheduleReducer;
         const { isOpen, vcipDetails, currentDate, isCancelModalOpened, cancelVcipDetails } = this.state;
-        
+
         return (
             <>
                 {/* {this.state.loader ? (
@@ -120,12 +137,12 @@ export class SchedulePendingList extends Component {
                                 <div>
                                     <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
                                         <li className="nav-item">
-                                            <a className="nav-link active" id="pendinglist-tab" data-toggle="pill" href="#pendinglist" role="tab" aria-controls="pills-home" aria-selected="true">
+                                            <a className="nav-link active" onClick={() => this.vcipListTab(1)} id="pendinglist-tab" data-toggle="pill" href="#pendinglist" role="tab" aria-controls="pills-home" aria-selected="true">
                                                 Unscheduled List
                                             </a>
                                         </li>
                                         <li className="nav-item">
-                                            <a className="nav-link" id="activeList-tab" data-toggle="pill" href="#activeList" role="tab" aria-controls="pills-profile" aria-selected="false">
+                                            <a className="nav-link" onClick={() => this.vcipListTab(2)} id="activeList-tab" data-toggle="pill" href="#activeList" role="tab" aria-controls="pills-profile" aria-selected="false">
                                                 Scheduled List
                                             </a>
                                         </li>
@@ -139,7 +156,7 @@ export class SchedulePendingList extends Component {
                                             />
                                         </div>
                                         <div className="tab-pane fade" id="activeList" role="tabpanel" aria-labelledby="activeList-tab">
-                                            <PendingListTable
+                                            <ScheduleListTable
                                                 pendingList={scheduleList}
                                                 showScheduleModal={this.showCancelModal}
                                                 isScheduled={true}

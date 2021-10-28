@@ -1,16 +1,18 @@
 import React from 'react'
 
-const PendingListTable = (props) => {
+const ScheduleListTable = (props) => {
     console.log(props.pendingList)
     return (
-        <div className="table-responsive"><table className="table">
+        <div className="table-responsive">
+            <table className="table">
             <thead className="thead-dark">
                 <tr>
                     <th scope="col">S NO</th>
                     <th scope="col">VCIP ID</th>
                     <th scope="col">Pension ID</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Email</th>
+                    <th scope="col">Slot Date</th>
+                    <th scope="col">Slot Time</th>
                     <th scope="col">Mobile</th>
                     <th scope="col">Created Date</th>
                     {/* <th scope="col">Location</th> */}
@@ -24,7 +26,8 @@ const PendingListTable = (props) => {
                         <td>{item.vcipid}</td>
                         <td>{item.ppoid}</td>
                         <td>{item.name}</td>
-                        <td>{item.email}</td>
+                        <td className="ws-nowrap">{item.sdate}</td>
+                        <td className="ws-nowrap">{item.stime}</td>
                         <td>{item.mobileno}</td>
                         <td className="ws-nowrap">{item.createdon}</td>
                         {/* <td>{item.customerloc}</td> */}
@@ -47,4 +50,4 @@ const PendingListTable = (props) => {
     )
 }
 
-export default PendingListTable;
+export default ScheduleListTable;
