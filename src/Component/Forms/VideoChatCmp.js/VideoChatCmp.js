@@ -7,7 +7,7 @@ const VideoChatCmp = (props) => {
         <Aux>
             <div className="live-video sr1">
                 <h2 className="live-title">
-                    CUSTOMER
+                    PENSIONER
                 </h2>
                 <div className="customer-video">
                     {/* <video src="" poster="images/Sample_User_Icon.png" width="100%" height="100%"></video> */}
