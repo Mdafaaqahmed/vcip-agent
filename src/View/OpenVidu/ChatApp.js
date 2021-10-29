@@ -533,7 +533,8 @@ class ChatApp extends Component {
                         <div className={`live-video sr1 vheight1 bdr-left bdr-bottom  ${this.state.session !== undefined ? '' : ' btn-center'}`}>
                             {this.state.session !== undefined ? (<div className="customer-video">
                                 <h2 className="live-title">
-                                    AGENT
+                                    TREASURY OFFICER/BRANCH MANAGER
+
                                     {/* {this.state.minutesLabel + ":" + this.state.secondsLabel} */}
                                 </h2>
                                 <div className="customer-video-box">
@@ -577,7 +578,7 @@ class ChatApp extends Component {
                         <div className="live-video sr1 vheight1 bdr-left bdr-bottom">
                             <div className="customer-video">
                                 <h2 className="live-title">
-                                    CUSTOMER
+                                    PENSIONER
                                 </h2>
                                 <div className="customer-video-box video-image-capture">
                                     {this.state.subscribers.map((sub, i) => {

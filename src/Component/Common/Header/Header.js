@@ -139,7 +139,7 @@ class Header extends Component {
                                         <p className="banker-name">
                                             {this.state.username}
                                         </p>
-                                        <p className="banker-id">{this.state.role === "1" ? "Officer" : "Auditor"}</p>
+                                        <p className="banker-id">{this.state.role === "1" ? "Treasury Officer/Branch Manager" : "Treasury Officer"}</p>
                                     </div>
                                 </div>
                             </div>
